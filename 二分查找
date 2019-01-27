@@ -1,0 +1,100 @@
+public class ErFenFind {
+    public static int GetNumberOfK(int [] array , int k) {
+        int left = 0,right = array.length;
+        int l,r;
+        while (left < right){
+            int middle = (right + left) / 2;
+            if (array[middle] >= k){
+                right = middle;
+            }else{
+                left = middle + 1;
+            }
+        }
+
+        l = right;
+        left = 0;
+        right = array.length;
+
+        while (left < right){
+            int middle = (right + left) / 2;
+            if (array[middle] <= k){
+                left = middle + 1;
+            }else {
+                right = middle;
+            }
+        }
+
+        r = left;
+        return r - l;
+    }
+    public static int FindNumberIndex(int []arr,int k){
+        int left = 0,right = arr.length;
+        while (left < right){
+            int middle = (left + right) / 2;
+            if (arr[middle] == k) return middle;
+            else if (arr[middle] > k) right = middle - 1;
+            else left = middle + 1;
+        }
+
+        return left;
+    }
+    public static int FindNumberFirstIndex(int []arr,int k){
+        int left = 0,right = arr.length;
+        while (left < right){
+            int middle = (left + right) / 2;
+            if (arr[middle] >= k) right = middle;
+            else left = middle + 1;
+        }
+
+        return left;
+    }
+    public static int FindNumberLastIndex(int arr[],int k){
+        int left = 0,right = arr.length;
+        while (left < right){
+            int middle = (left + right) / 2;
+            if (arr[middle] <= k) left = middle + 1;
+            else right = middle;
+        }
+
+        return left - 1;
+    }
+    public static int FindNumberFirstBigIndex(int arr[],int k){
+        int left = 0,right = arr.length;
+
+        while (left < right){
+            int middle = (left + right) / 2;
+            if (arr[middle] > k) right = middle;
+            else left = middle + 1;
+        }
+
+        return left >= arr.length?-1:left;
+    }
+    public static int FindNumberFirstLessIndex(int arr[],int k){
+        int left = 0,right = arr.length;
+
+        while (left < right){
+            int middle = (left + right) / 2;
+            if (arr[middle] < k) left = middle + 1;
+            else right = middle;
+        }
+
+        return left - 1;
+    }
+    public static void main(String[] args) {
+        int arr[] = {1,1,2,3,3,4,5,5,5,6,7,7,7,8,9,9,9,9,10,10,11,12,13,14};
+        int arr1[] = {1,3,5};
+        System.out.println(arr.length);
+
+        System.out.println("一个数字在数组中出现的次数:" + GetNumberOfK(arr,9));
+
+        System.out.println("一个数字在数组中出现的位置:" + FindNumberIndex(arr1,5));
+
+        System.out.println("一个数字在数组中第一次出现的位置:" + FindNumberFirstIndex(arr,5));
+
+        System.out.println("一个数字在数组中最后一次出现的位置:" + FindNumberLastIndex(arr,9));
+
+        System.out.println("找到一个首次比k大的值的位置:" + FindNumberFirstBigIndex(arr,13));
+
+        System.out.println("找到一个首次比k小的值的位置:" + FindNumberFirstLessIndex(arr,10));
+    }
+}
